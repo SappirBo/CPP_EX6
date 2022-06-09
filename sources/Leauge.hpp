@@ -13,7 +13,7 @@ class Leauge{
 
     public:
         Leauge();
-        Leauge(std::vector<Team> t);
+        Leauge(std::vector<Team> const *t);
         ~Leauge(){}
 
         friend std::ostream& operator<<(std::ostream& os, Leauge& T){
