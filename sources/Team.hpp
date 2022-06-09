@@ -11,7 +11,7 @@
 /**
  * @brief List of 40 Teams Names For Random Team Constractor
  */
-std::string team_names[] = {"Boston Celtics","Brooklyn Nets","New York Knicks","Philadelphia 76ers","Toronto Raptors","Chicago Bulls",
+std::string const team_names[] = {"Boston Celtics","Brooklyn Nets","New York Knicks","Philadelphia 76ers","Toronto Raptors","Chicago Bulls",
                             "Cleveland Cavaliers","Detroit Pistons","Indiana Pacers","Milwaukee Bucks","Atlanta Hawks","Charlotte Hornets","Miami Heat","Orlando Magic"
                             ,"Washington Wizards","Denver Nuggets","Minnesota Timberwolves","Oklahoma City Thunder","Portland Trail Blazers","Utah Jazz"
                             ,"Golden State Warriors","LA Clippers","Los Angeles Lakers","Phoenix Suns","Sacramento Kings","Dallas Mavericks","Houston Rockets"
@@ -22,21 +22,13 @@ std::string team_names[] = {"Boston Celtics","Brooklyn Nets","New York Knicks","
  * @brief Function for getting random team index. 
  * @return int - random index number [0,39]. 
  */
-int random_team_index(){
-    // srand(time(0));
-    return (rand()%40) ;
-}
+int random_team_index();
 
 /**
  * @brief Function for getting random team rate. 
  * @return double - random index rate [0,1]. 
  */
-double random_team_rate(){
-    // srand(time(0));
-    double num = rand()%101;
-    num = num/100;
-    return num;
-}
+double random_team_rate();
 
 
 /**
@@ -61,6 +53,7 @@ class Team{
         this->rate = Rate;
         this->ID = -1;
     }
+    ~Team(){}
     
     std::string getName(){
         return this->name;
@@ -74,5 +67,4 @@ class Team{
         os << "Name: "<< T.getName() << ", Rate: " << T.getRate();
         return os;
     }
-
 };
