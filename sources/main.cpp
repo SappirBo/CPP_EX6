@@ -11,7 +11,6 @@ int main(){
     // Test for argumented constractor.
     Team a("Team A",0.5);
     Team b("Team B",0.33);
-
     cout << a << endl << b << endl;
     
     Team c;

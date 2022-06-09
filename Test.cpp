@@ -9,6 +9,7 @@
 using namespace std;
 
 TEST_CASE("Class Team"){
+    cout << "***** ***** Start Test! ***** *****\n";
     // Test for argumented constractor.
     Team a("Team A",0.5);
     Team b("Team B",0.33);
@@ -18,5 +19,4 @@ TEST_CASE("Class Team"){
     CHECK_EQ(b.getName(),"Team B");
     CHECK_EQ(b.getRate(),0.33);
 
-    cout << a << endl << b << endl;
 }

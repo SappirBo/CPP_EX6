@@ -14,9 +14,10 @@ SOURCES=$(wildcard $(SOURCE_PATH)/*.cpp)
 HEADERS=$(wildcard $(SOURCE_PATH)/*.hpp)
 OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
-run: test
+run: test main
 
-test:  $(OBJECTS)
+
+main:  $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp $(HEADERS)
@@ -25,7 +26,6 @@ test:  $(OBJECTS)
 $(OBJECT_PATH)/%.o: $(SOURCE_PATH)/%.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
-
 tidy:
 	clang-tidy $(SOURCES) $(HEADERS) $(TIDY_FLAGS) --
 
@@ -33,5 +33,5 @@ valgrind: test
 	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test 2>&1 | { egrep "lost| at " || true; }
 
 clean:
-	rm -f $(OBJECTS) *.o test* 
+	rm -f $(OBJECTS) *.o test* main 
 	rm -f StudentTest*.cpp
