@@ -64,6 +64,8 @@ class Team{
         return this->rate;
     }
 
+    int getID(){return this->ID;}
+    
     friend std::ostream& operator<<(std::ostream& os, Team& T){
         os << "Name: "<< T.getName() << ", Rate: " << T.getRate();
         return os;

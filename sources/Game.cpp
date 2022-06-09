@@ -14,13 +14,11 @@
  */
 int Game::winner(){
     // Get two random numbers from 0 to 1 included;
-    std::cout << rand()<<std::endl;
     double num1 = (double) (rand()%101)/100;
     double num2 = (double) (rand()%101)/100;
-    std::cout <<num1<<" | "<<num2<<std::endl;
     // Divide the numbers by 3 for lower impact. 
-    num1 = num1/3;
-    num2 = num2/3;
+    num1 = num1;
+    num2 = num2;
 
     double score1 = this->getHomeTeam()->getRate() + num1;
     double score2 = this->getOutTeam()->getRate() + num2;

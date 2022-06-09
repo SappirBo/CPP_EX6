@@ -5,6 +5,7 @@
 #include <string>
 #include "Team.hpp"
 #include "Game.hpp"
+#include "Leauge.hpp"
 
 using namespace std;
 
@@ -26,7 +27,15 @@ int main(){
     Game game2(&c,&d);
     i = game2.winner();
     cout << i << endl;
+    // Create Game A vs C
+    Game game3(&c,&c);
+    i = game3.winner();
+    cout << i << endl;
 
-    
+    // Create Leauge
+    Leauge l;
+
+    cout << l << endl;
+
     return -1;
 }
