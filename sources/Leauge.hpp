@@ -19,7 +19,7 @@ class Leauge{
         friend std::ostream& operator<<(std::ostream& os, Leauge& T){
             size_t i;
             for(i=0;i<20;i++){
-                os << T.team_list.at(i) << std::endl;
+                os << "     " << T.team_list.at(i) << std::endl;
             }
             return os;
         }
