@@ -4,6 +4,7 @@
 #include <time.h>
 #include <string>
 #include "Team.hpp"
+#include "Game.hpp"
 
 using namespace std;
 
@@ -16,6 +17,16 @@ int main(){
     Team c;
     Team d;
     cout << c << endl << d << endl;
+    
+    // Create Game A vs B
+    Game game1(&a,&b);
+    int i = game1.winner();
+    cout << i << endl;
+    // Create Game C vs D
+    Game game2(&c,&d);
+    i = game2.winner();
+    cout << i << endl;
+
     
     return -1;
 }
