@@ -23,11 +23,17 @@ int Game::winner(){
     double score1 = this->getHomeTeam()->getRate() + num1;
     double score2 = this->getOutTeam()->getRate() + num2;
     
-    std::cout<<this->getHomeTeam()->getName()<<": "<<score1 <<" | "<<this->getOutTeam()->getName() << ": "<<score2<<std::endl; 
+    // Passind the Final Scores.
+    this->home_score = score1;
+    this->out_score = score2;
+    this->finish_stats = 1;
+
 
     if(score1 >= score2){
         return 0;
-    }else{return 1;}
+    }else{
+        return 1;
+    }
 
     return -1;
 }
