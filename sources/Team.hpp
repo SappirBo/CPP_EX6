@@ -5,6 +5,14 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include <array>
+
+// Settingup const numbers (As the Format tidy suggests).
+constexpr int FORTY = 40;
+constexpr int ONE_HUNDRED_AND_ONE = 101;
+constexpr int HUNDRED = 100;
+constexpr double HALF = 0.5;
+constexpr double A_THIRD = 0.33;
 
 
 
@@ -12,7 +20,7 @@
 /**
  * @brief List of 40 Teams Names For Random Team Constractor
  */
-std::string const team_names[] = {"Boston Celtics","Brooklyn Nets","New York Knicks","Philadelphia 76ers","Toronto Raptors","Chicago Bulls",
+std::array<std::string,40> const team_names = {"Boston Celtics","Brooklyn Nets","New York Knicks","Philadelphia 76ers","Toronto Raptors","Chicago Bulls",
                             "Cleveland Cavaliers","Detroit Pistons","Indiana Pacers","Milwaukee Bucks","Atlanta Hawks","Charlotte Hornets","Miami Heat","Orlando Magic"
                             ,"Washington Wizards","Denver Nuggets","Minnesota Timberwolves","Oklahoma City Thunder","Portland Trail Blazers","Utah Jazz"
                             ,"Golden State Warriors","LA Clippers","Los Angeles Lakers","Phoenix Suns","Sacramento Kings","Dallas Mavericks","Houston Rockets"
@@ -38,36 +46,50 @@ double random_team_rate();
  */
 class Team{
     private:
-    std::string name;
-    double rate;
-    int ID; // The Index of the team in the team name array, if it is not in the array it is -1;
+        std::string name;
+        double rate;
+        int ID; // The Index of the team in the team name array, if it is not in the array it is -1;
     
     public:
-    Team(){
-        int index = random_team_index();
-        this->name = team_names[index];
-        this->ID = index;
-        this->rate = random_team_rate();
-    }
-    Team(std::string Name, double Rate){
-        this->name = Name;
-        this->rate = Rate;
-        this->ID = -1;
-    }
-    ~Team(){}
-    
-    std::string getName(){
-        return this->name;
-    }
-    
-    double getRate(){
-        return this->rate;
-    }
+        /**
+         * @brief Defult Constructor For Team object,
+         *        Creating New Random Team with a Random Rate: Using 'random_team_rate()' and 'random_team_index()'.
+         */
+        Team(): rate(random_team_rate()) {
+            size_t index = (size_t) random_team_index();
+            this->name = team_names.at(index);
+            this->ID = (int) index;
+        }
+        // Argumented Constractor.
+        Team(std::string Name, double Rate): name(std::move(Name)), rate(Rate), ID(-1){}
+        // Copy Constractor.
+        Team(const Team &other_team): 
+            name(std::move(other_team.getName())), rate(other_team.getRate()),ID(other_team.getID()){}
+        // Destructor For Team Object.
+        ~Team(){}
+        
+        // Getters For Team Arguments: name, rate and id.
+        std::string getName() const {return this->name;}
+        double getRate() const {return this->rate;}
+        int getID() const {return this->ID;}
 
-    int getID(){return this->ID;}
-    
-    friend std::ostream& operator<<(std::ostream& os, Team& T){
-        os << "Name: "<< T.getName() << ", Rate: " << T.getRate();
-        return os;
-    }
+        // Copy Assignment Operator.
+        Team & operator=(const Team &other_team){
+            this->name = other_team.getName();
+            this->rate = other_team.getRate();
+            this->ID = other_team.getID();
+            return *this;
+        }
+        
+        // Move Constructor.
+        Team (Team &&) = default;	
+        
+        // Move assignment Operator.
+        Team& operator=(Team&& other) = default;
+        
+        //Overloading the << Operator for Team.
+        friend std::ostream& operator<<(std::ostream& _os, Team& team){
+            _os << "Name: "<< team.getName() << ", Rate: " << team.getRate();
+            return _os;
+        }
 };

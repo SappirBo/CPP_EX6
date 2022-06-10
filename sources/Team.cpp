@@ -9,7 +9,7 @@
  * @return int - random index number [0,39]. 
  */
 int random_team_index(){
-    return (rand()%40) ;
+    return (rand()%FORTY) ;
 }
 
 /**
@@ -17,7 +17,7 @@ int random_team_index(){
  * @return double - random index rate [0,1]. 
  */
 double random_team_rate(){
-    double num = rand()%101;
-    num = num/100;
+    double num = rand()%ONE_HUNDRED_AND_ONE;
+    num = num/HUNDRED;
     return num;
 }
