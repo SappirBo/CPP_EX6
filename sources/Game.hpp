@@ -6,23 +6,22 @@
 #include <string>
 #include "Team.hpp"
 
+
 class Game{
+    
     private:
-        Team *home_team;
-        Team *out_team;
+        Team home_team;
+        Team out_team;
         bool finish_stats; // 0 for game hasn't finished, 1 for game is finished.  
 
     public:
-        Game(Team *home, Team *out){
-            this->home_team = home;
-            this->out_team = out;
-            this->finish_stats = false;
-        }
+        Game(Team home, Team out): 
+            home_team(std::move(home)), out_team(std::move(out)), finish_stats(false){}
         ~Game(){}
         
         // Get Functions for The teams, return a reffrence to the team.
-        Team *getHomeTeam(){return this->home_team;}
-        Team *getOutTeam(){return this->out_team;}
+        Team *getHomeTeam(){return &(this->home_team);}
+        Team *getOutTeam(){return &(this->out_team);}
 
         /**
          * @brief function for creating a match and  get a winner of the match,

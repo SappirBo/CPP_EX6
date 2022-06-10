@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string>
-#include "Team.hpp"
-#include "Game.hpp"
+#include "sources/Team.hpp"
+#include "sources/Game.hpp"
 // #include "Leauge.hpp"
 
 using namespace std;
@@ -20,15 +20,15 @@ int main(){
     cout << team_c << endl << team_d << endl;
     
     // Create Game A vs B
-    Game game1(&a,&b);
+    Game game1(team_a,team_b);
     int i = game1.winner();
     cout << i << endl;
     // Create Game C vs D
-    Game game2(&c,&d);
+    Game game2(team_c,team_d);
     i = game2.winner();
     cout << i << endl;
     // Create Game A vs C
-    Game game3(&c,&c);
+    Game game3(team_c,team_c);
     i = game3.winner();
     cout << i << endl;
 

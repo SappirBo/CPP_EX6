@@ -14,11 +14,11 @@
  */
 int Game::winner(){
     // Get two random numbers from 0 to 1 included;
-    double num1 = (double) (rand()%101)/100;
-    double num2 = (double) (rand()%101)/100;
+    double num1 = (double) (rand()%ONE_HUNDRED_AND_ONE)/HUNDRED;
+    double num2 = (double) (rand()%ONE_HUNDRED_AND_ONE)/HUNDRED;
     // Divide the numbers by 3 for lower impact. 
     num1 = num1;
-    num2 = num2;
+    num2 = num2;    
 
     double score1 = this->getHomeTeam()->getRate() + num1;
     double score2 = this->getOutTeam()->getRate() + num2;

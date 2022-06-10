@@ -1,9 +1,7 @@
 #!make -f
-# This Makefile can handle any set of cpp and hpp files.
-# To use it, you should put all your cpp and hpp files in the SOURCE_PATH folder.
 
-## Need to Change to clang++-9 before sending back.
-CXX=clang++-11
+## NEED TO CHANGE TO clang++-9 ,
+CXX=clang++-14
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects
@@ -15,14 +13,21 @@ SOURCES=$(wildcard $(SOURCE_PATH)/*.cpp)
 HEADERS=$(wildcard $(SOURCE_PATH)/*.hpp)
 OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
-run: test main
+run: main
+	./$^
 
-test: TestRunner.o Test.o $(OBJECTS)
+main: main.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+test: TestCounter.o Test.o $(OBJECTS)
+	$(CXX) $^ -o $@
 
-main:  $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+tidy:
+	clang-tidy $(HEADERS) $(TIDY_FLAGS) --
+
+valgrind: main test
+	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./demo 2>&1 | { egrep "lost| at " || true; }
+	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test 2>&1 | { egrep "lost| at " || true; }
 
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
@@ -30,12 +35,6 @@ main:  $(OBJECTS)
 $(OBJECT_PATH)/%.o: $(SOURCE_PATH)/%.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
-tidy:
-	clang-tidy $(SOURCES) $(HEADERS) $(TIDY_FLAGS) --
-
-valgrind: test
-	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./test 2>&1 | { egrep "lost| at " || true; }
-
 clean:
-	rm -f $(OBJECTS) *.o test* main test
+	rm -f $(OBJECTS) *.o test main
 	rm -f StudentTest*.cpp
