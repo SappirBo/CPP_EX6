@@ -18,5 +18,4 @@ TEST_CASE("Class Team"){
     CHECK_EQ(a.getRate(),0.5);
     CHECK_EQ(b.getName(),"Team B");
     CHECK_EQ(b.getRate(),0.33);
-
 }

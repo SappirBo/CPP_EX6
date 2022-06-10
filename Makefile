@@ -2,7 +2,8 @@
 # This Makefile can handle any set of cpp and hpp files.
 # To use it, you should put all your cpp and hpp files in the SOURCE_PATH folder.
 
-CXX=clang++-9
+## Need to Change to clang++-9 before sending back.
+CXX=clang++-11
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects
