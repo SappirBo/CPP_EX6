@@ -110,6 +110,7 @@ vector<size_t> Leauge::getSortedIndexVector(){
 
 std::string Leauge::getStats(){
     string ans = "";
+    double num = 0;
     vector<size_t> indexs = getSortedIndexVector();
     for(size_t i=0; i<MAX_LEAUGE; i++){
         string s = "";
@@ -121,27 +122,43 @@ std::string Leauge::getStats(){
         }
         ans += s;
         s.clear();
-        s += "| Points: ";
+        s += "| Won: ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getPoints() );
-        while(s.size() < TEN+5){
+        while(s.size() < TEN+1){
             s += " ";
         }
         ans += s;
         s.clear();
-        s += "| Balls: ";
+        s += "| Lost: ";
+        s += to_string(this->Round - this->getTeams_vec()->at(indexs.at(i)).getPoints() );
+        while(s.size() < TEN+2){
+            s += " ";
+        }
+        ans += s;
+        s.clear();
+        s += "| Goal Ratio: ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getErned_Score());
-        while(s.size() < TEN+5){
+        while(s.size() < TEN+3){
             s += " ";
         }
         s += "/ ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score());
         ans += s;
         s.clear();
-        while(s.size() <TEN-5){
+        while(s.size() < 2){
             s += " ";
         }
+        s += "(";
+        num = (double) this->getTeams_vec()->at(indexs.at(i)).getErned_Score() / this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score();
+        s += to_string((int)(num*HUNDRED));
+        s += "%)";
+        while(s.size() < TEN-1){
+            s += " ";
+        }
+        ans += s;
+        s.clear();
         s += " | Success rate: ";
-        double num = (double)(this->getTeams_vec()->at(indexs.at(i)).getPoints()) / this->Round;
+        num = (double)(this->getTeams_vec()->at(indexs.at(i)).getPoints()) / this->Round;
         s += to_string((int) (num*HUNDRED));
         s += "%";
         ans += s;

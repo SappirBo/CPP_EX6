@@ -43,8 +43,10 @@ std::ostream& operator<<(std::ostream& _os, Schedule& sch){
     if(sch.Round == 0){
         _os << "Schedule Haven't Started!";
     }else{
-        _os << "Schedule Details: \n";
-        // _os << 
+        _os << "***** ***** ***** ***** Schedule Details: ***** ***** ***** *****\n";
+        _os << "Schedule Rounds: " << sch.getRound() << " / 40 .\n";
+        _os << "Full Details:\n";
+        _os << sch.leauge_ptr->getStats() << "\n\n";
     }
     return _os;
 }

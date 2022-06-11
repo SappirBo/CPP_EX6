@@ -72,14 +72,15 @@ int main(){
     Leauge leauge1;
 
     Schedule sch(&leauge1);
-    for(int i=0;i<40;i++){
+    for(int i=0;i<20;i++){
         sch.runRound();
     }
-    
+    cout << sch << endl;
 
-
-    cout << leauge1.getStats() << endl;
-    cout << sch.getRound() << endl;
+    for(int i=0;i<20;i++){
+        sch.runRound();
+    }
+    cout << sch << endl;
 
     return -1;
 }
