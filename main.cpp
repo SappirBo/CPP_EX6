@@ -5,7 +5,7 @@
 #include <string>
 #include "sources/Team.hpp"
 #include "sources/Game.hpp"
-// #include "Leauge.hpp"
+#include "sources/Leauge.hpp"
 
 using namespace std;
 
@@ -32,40 +32,41 @@ int main(){
     game3.winner();
     cout << game3 << endl;
 
-    // // Create Leauge and Print the result.
-    // Leauge l;
-    // cout << l << endl;
+    // Create Leauge and Print the result.
+    Leauge l;
+    cout << l << endl;
 
-    // // Create Leauge With half vector and Print the result.
-    // Team a1("a1",0.5);
-    // Team a2("a2",0.5);
-    // Team a3("a3",0.5);
-    // Team a4("a4",0.5);
-    // Team a5("a5",0.5);
-    // Team a6("a6",0.5);
-    // Team a7("a7",0.5);
-    // Team a8("a8",0.5);
-    // Team a9("a9",0.5);
-    // Team a10("a10",0.5);
+    // Create Leauge With half vector and Print the result.
+    Team team_a1("a1",HALF);
+    Team team_a2("a2",HALF);
+    Team team_a3("a3",HALF);
+    Team team_a4("a4",HALF);
+    Team team_a5("a5",HALF);
+    Team team_a6("a6",HALF);
+    Team team_a7("a7",HALF);
+    Team team_a8("a8",HALF);
+    Team team_a9("a9",HALF);
+    Team team_a10("a10",HALF);
 
-    // vector<Team> tenTeamVec = {a1,a2,a3,a4,a5,a6,a7,a8,a9,a10};
-    // Leauge halfVec(&tenTeamVec);
-    // cout << halfVec << endl;
+    vector<Team> tenTeamVec = {team_a1,team_a2,team_a3,team_a4,team_a5,team_a6,team_a7,team_a8,team_a9,team_a10};
+    Leauge halfVec(&tenTeamVec);
+    cout << halfVec << endl;
 
-    // // Create Leauge With full vector and Print the result.
-    // Team a11("a11",0.5);
-    // Team a12("a12",0.5);
-    // Team a13("a13",0.5);
-    // Team a14("a14",0.5);
-    // Team a15("a15",0.5);
-    // Team a16("a16",0.5);
-    // Team a17("a17",0.5);
-    // Team a18("a18",0.5);
-    // Team a19("a19",0.5);
-    // Team a20("a20",0.5);
-    // vector<Team> fullTeamVec = {a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20};
-    // Leauge fullVec(&fullTeamVec);
-    // cout << fullVec << endl;
+    // Create Leauge With full vector and Print the result.
+    Team team_a11("a11",HALF);
+    Team team_a12("a12",HALF);
+    Team team_a13("a13",HALF);
+    Team team_a14("a14",HALF);
+    Team team_a15("a15",HALF);
+    Team team_a16("a16",HALF);
+    Team team_a17("a17",HALF);
+    Team team_a18("a18",HALF);
+    Team team_a19("a19",HALF);
+    Team team_a20("a20",HALF);
+    vector<Team> fullTeamVec = {team_a1,team_a2,team_a3,team_a4,team_a5,team_a6,team_a7,team_a8,team_a9,team_a10,
+                                team_a11,team_a12,team_a13,team_a14,team_a15,team_a16,team_a17,team_a18,team_a19,team_a20};
+    Leauge fullVec(&fullTeamVec);
+    cout << fullVec << endl;
 
 
     return -1;
