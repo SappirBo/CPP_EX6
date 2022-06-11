@@ -81,8 +81,53 @@ Leauge & Leauge::operator=(const Leauge &other_Leauge){
     return *this;
 }
 
+void swap(vector<size_t> *arr, size_t i, size_t j){
+    size_t tmp = arr->at(i);
+    arr->at(i) = arr->at(j);
+    arr->at(j) = tmp;
+}
+
+// O(1).
+vector<size_t> Leauge::getSortedIndexVector(){
+    vector<size_t> ans = {0,1,2,3,4,5,6,7,8,9,
+                            10,11,12,13,14,15,16,17,18,19};
+    size_t i,j;
+    for(i=0; i<MAX_LEAUGE-1; i++){
+        for(j=i; j<MAX_LEAUGE; j++){
+            if(i != j){
+                if(this->getTeams_vec().at(ans.at(i)).getPoints() < this->getTeams_vec().at(ans.at(j)).getPoints()){
+                    swap(&ans,i,j);
+                }else if(this->getTeams_vec().at(ans.at(i)).getPoints() == this->getTeams_vec().at(ans.at(j)).getPoints()){
+                    if(this->getTeams_vec().at(ans.at(i)).getErned_Score() < this->getTeams_vec().at(ans.at(j)).getErned_Score()){
+                        swap(&ans,i,j);
+                    }
+                }
+            }
+        }
+    }
+    return ans;
+}
 
 
+
+std::string Leauge::getStats(){
+    string ans = "";
+    vector<size_t> indexs = getSortedIndexVector();
+    for(size_t i=0; i<MAX_LEAUGE; i++){
+        string s = "";
+        s += to_string(i);
+        s += ". ";
+        s += this->getTeams_vec().at(indexs.at(i)).getName();
+        while(s.size() < 30){
+            s += " ";
+        }
+        s += "| score: ";
+        s += to_string(this->getTeams_vec().at(indexs.at(i)).getPoints() );
+        ans += s;
+        ans += "\n"; 
+    }
+    return ans;
+}
 
 
 

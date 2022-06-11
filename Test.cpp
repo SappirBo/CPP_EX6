@@ -141,4 +141,7 @@ TEST_CASE("Class Schedule "){
     // Checking the Schedule Constractor.
     Leauge test_leauge;
     CHECK_NOTHROW(Schedule sch(&test_leauge));
+
+    Schedule sch(&test_leauge);
+    
 }

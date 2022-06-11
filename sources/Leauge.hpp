@@ -25,6 +25,10 @@ class Leauge{
         // Return the amount of teams in this Leauge (Basicly it is for Testing).
         size_t size() const {return this->team_list.size();}
 
+        std::string getStats();
+
+        std::vector<size_t> getSortedIndexVector();
+
         std::vector<Team> getTeams_vec() const{return this->team_list;}
 
         // Copy Assignment Operator.

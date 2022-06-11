@@ -12,18 +12,38 @@
 Schedule::Schedule(Leauge *pleauge){
     this->leauge_ptr = pleauge;
     this->Round = 0;
-    this->games_list1 = {0,1,2,3,4,5,6,7,8,9};
-    this->games_list2 = {10,11,12,13,14,15,16,17,18,19};
+    this->home_list = {0,1,2,3,4,5,6,7,8,9};
+    this->out_list = {10,11,12,13,14,15,16,17,18,19};
 }
 
-// void Schedule::runRound(){
-//     size_t index = 0;
-//     Game tmp_game;
-//     for(; index<20; index++){
-//         tmp_game.clear();
-//         tmp_game.setHomeTeam(&(leauge_ptr->getTeams_vec().at(games_list1.at(index))));
-//         tmp_game.setOutTeam(&(leauge_ptr->getTeams_vec().at(games_list2.at(index))));
+void Schedule::runRound(){
+    size_t index = 0;
+    // Creating Game Object that will run all games in this round. 
+    Game tmp_game;
+    
+    // Run matches between Suitable Home / Out lists.
+    for(; index<20; index++){
+        tmp_game.clear();
+        tmp_game.setHomeTeam(&(leauge_ptr->getTeams_vec().at(home_list.at(index))));
+        tmp_game.setOutTeam(&(leauge_ptr->getTeams_vec().at(out_list.at(index))));
         
-//         tmp_game.winner();
-//     }
-// }
+        tmp_game.winner();
+    }
+
+    this->Round++;
+}
+
+
+
+
+
+std::ostream& operator<<(std::ostream& _os, Schedule& sch){
+    if(sch.Round == 0){
+        _os << "Schedule Haven't Started!";
+    }else{
+        _os << "Schedule Details: \n";
+        // _os << 
+    }
+    return _os;
+}
+

@@ -14,8 +14,8 @@ class Schedule{
     private:
         Leauge *leauge_ptr;
         int Round; // Round is int in range [0,40] (where 0 means the Schedule hasn't done).
-        std::array<size_t,10> games_list1;
-        std::array<size_t,10>  games_list2;
+        std::array<size_t,TEN> home_list;
+        std::array<size_t,TEN>  out_list;
 
     public:
         Schedule(Leauge *pleauge);
@@ -30,6 +30,5 @@ class Schedule{
          */
         void runSeason();
 
-
-
+        friend std::ostream& operator<<(std::ostream& _os, Schedule& sch);
 };

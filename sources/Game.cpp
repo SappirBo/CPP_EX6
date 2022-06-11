@@ -82,8 +82,10 @@ int Game::winner(){
 
     // Return the Finle winner (0 If Home team won, 1 if Out team won).
     if(score1 >= score2){
+        this->home_team->raisePoint();
         return 0;
     }else{
+        this->out_team->raisePoint();
         return 1;
     }
 

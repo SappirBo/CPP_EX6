@@ -69,5 +69,9 @@ int main(){
     cout << fullVec << endl;
 
 
+    Leauge test;
+    cout << "\n\n" << test.getStats()<<endl;
+
+
     return -1;
 }
