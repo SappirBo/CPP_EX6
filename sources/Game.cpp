@@ -72,11 +72,11 @@ int Game::winner(){
     // Passind the Final Scores.
     this->home_score = (int) score1;
     this->out_score = (int) score2;
-    this->getHomeTeam()->setErned_Score((int) score1);
-    this->getOutTeam()->setErned_Score((int) score2);
+    this->getHomeTeam()->setErned_Score(this->home_score);
+    this->getOutTeam()->setErned_Score(this->out_score);
 
-    this->getHomeTeam()->setAbsorbed_Score((int) score2);
-    this->getOutTeam()->setAbsorbed_Score((int) score1);
+    this->getHomeTeam()->setAbsorbed_Score(this->out_score);
+    this->getOutTeam()->setAbsorbed_Score(this->home_score);
 
     this->finish_stats = 1;
 

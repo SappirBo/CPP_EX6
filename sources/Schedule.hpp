@@ -30,5 +30,7 @@ class Schedule{
          */
         void runSeason();
 
+        int getRound() const {return this->Round;}
+
         friend std::ostream& operator<<(std::ostream& _os, Schedule& sch);
 };

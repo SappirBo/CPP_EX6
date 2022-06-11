@@ -9,6 +9,8 @@
 #include "Leauge.hpp"
 #include "Schedule.hpp"
 
+using namespace std;
+
 Schedule::Schedule(Leauge *pleauge){
     this->leauge_ptr = pleauge;
     this->Round = 0;
@@ -22,14 +24,12 @@ void Schedule::runRound(){
     Game tmp_game;
     
     // Run matches between Suitable Home / Out lists.
-    for(; index<20; index++){
+    for(; index<TEN; index++){
         tmp_game.clear();
-        tmp_game.setHomeTeam(&(leauge_ptr->getTeams_vec().at(home_list.at(index))));
-        tmp_game.setOutTeam(&(leauge_ptr->getTeams_vec().at(out_list.at(index))));
-        
+        tmp_game.setHomeTeam(&(leauge_ptr->getTeams_vec()->at(home_list.at(index))));
+        tmp_game.setOutTeam(&(leauge_ptr->getTeams_vec()->at(out_list.at(index))));
         tmp_game.winner();
     }
-
     this->Round++;
 }
 

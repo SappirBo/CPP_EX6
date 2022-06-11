@@ -95,10 +95,10 @@ vector<size_t> Leauge::getSortedIndexVector(){
     for(i=0; i<MAX_LEAUGE-1; i++){
         for(j=i; j<MAX_LEAUGE; j++){
             if(i != j){
-                if(this->getTeams_vec().at(ans.at(i)).getPoints() < this->getTeams_vec().at(ans.at(j)).getPoints()){
+                if(this->getTeams_vec()->at(ans.at(i)).getPoints() < this->getTeams_vec()->at(ans.at(j)).getPoints()){
                     swap(&ans,i,j);
-                }else if(this->getTeams_vec().at(ans.at(i)).getPoints() == this->getTeams_vec().at(ans.at(j)).getPoints()){
-                    if(this->getTeams_vec().at(ans.at(i)).getErned_Score() < this->getTeams_vec().at(ans.at(j)).getErned_Score()){
+                }else if(this->getTeams_vec()->at(ans.at(i)).getPoints() == this->getTeams_vec()->at(ans.at(j)).getPoints()){
+                    if(this->getTeams_vec()->at(ans.at(i)).getErned_Score() < this->getTeams_vec()->at(ans.at(j)).getErned_Score()){
                         swap(&ans,i,j);
                     }
                 }
@@ -117,12 +117,23 @@ std::string Leauge::getStats(){
         string s = "";
         s += to_string(i);
         s += ". ";
-        s += this->getTeams_vec().at(indexs.at(i)).getName();
+        s += this->getTeams_vec()->at(indexs.at(i)).getName();
         while(s.size() < 30){
             s += " ";
         }
-        s += "| score: ";
-        s += to_string(this->getTeams_vec().at(indexs.at(i)).getPoints() );
+        s += "| Points: ";
+        s += to_string(this->getTeams_vec()->at(indexs.at(i)).getPoints() );
+        while(s.size() < TEN+1){
+            s += " ";
+        }
+        s += "| Balls: ";
+        s += to_string(this->getTeams_vec()->at(indexs.at(i)).getErned_Score());
+        while(s.size() < TEN+1){
+            s += " ";
+        }
+        s += "/ ";
+        s += to_string(this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score());
+
         ans += s;
         ans += "\n"; 
     }

@@ -88,7 +88,7 @@ class Team{
         double getRate() const {return this->rate;}
         int getID() const {return this->ID;}
         int getPoints()const {return this->points;}
-        void raisePoint(){this->points++;}
+        void raisePoint(){this->points += 1;}
         // Setters / Getters for Erned/Absorbed score.
         int getErned_Score() const{return this->total_Earned_score;}
         int getAbsorbed_Score() const{return this->total_Absorbed_score;}

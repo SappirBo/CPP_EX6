@@ -29,7 +29,10 @@ class Leauge{
 
         std::vector<size_t> getSortedIndexVector();
 
-        std::vector<Team> getTeams_vec() const{return this->team_list;}
+        std::vector<Team>* getTeams_vec() {
+            std::vector<Team>* list_ptr = &this->team_list;
+            return list_ptr;
+        }
 
         // Copy Assignment Operator.
         Leauge & operator=(const Leauge &other_Leauge);

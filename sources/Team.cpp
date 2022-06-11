@@ -19,6 +19,8 @@ int random_team_index(){
 double random_team_rate(){
     double num = rand()%ONE_HUNDRED_AND_ONE;
     num = num/HUNDRED;
+    if(num <0){num = 0;}
+    if(num >1){num =1;}
     return num;
 }
 
