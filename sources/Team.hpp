@@ -52,19 +52,23 @@ class Team{
         std::string name;
         double rate;
         int ID; // The Index of the team in the team name array, if it is not in the array it is -1;
+        int total_Earned_score;
+        int total_Absorbed_score;
     
     public:
         /**
          * @brief Defult Constructor For Team object,
          *        Creating New Random Team with a Random Rate: Using 'random_team_rate()' and 'random_team_index()'.
          */
-        Team(): rate(random_team_rate()) {
+        Team(): rate(random_team_rate()) ,total_Earned_score(0),
+                total_Absorbed_score(0) {
             size_t index = (size_t) random_team_index();
             this->name = team_names.at(index);
             this->ID = (int) index;
         }
         // Argumented Constractor.
-        Team(std::string Name, double Rate): name(std::move(Name)), ID(-1){
+        Team(std::string Name, double Rate): name(std::move(Name)), ID(-1),
+            total_Earned_score(0),total_Absorbed_score(0){
             if(rate > 1 || rate < 0){
                 throw std::invalid_argument("Rate Must Be In Range [0,1]!.");
             }
@@ -72,7 +76,8 @@ class Team{
         }
         // Copy Constractor.
         Team(const Team &other_team): 
-            name(std::move(other_team.getName())), rate(other_team.getRate()),ID(other_team.getID()){}
+            name(std::move(other_team.getName())), rate(other_team.getRate()),ID(other_team.getID()),
+            total_Absorbed_score(other_team.getAbsorbed_Score()), total_Earned_score(other_team.getErned_Score()) {}
         // Destructor For Team Object.
         ~Team(){}
         
@@ -80,6 +85,15 @@ class Team{
         std::string getName() const {return this->name;}
         double getRate() const {return this->rate;}
         int getID() const {return this->ID;}
+        
+        // Setters / Getters for Erned/Absorbed score.
+        int getErned_Score() const{return this->total_Earned_score;}
+        int getAbsorbed_Score() const{return this->total_Absorbed_score;}
+        void setErned_Score(int num) {this->total_Earned_score += num;}
+        void setAbsorbed_Score(int num) {this->total_Absorbed_score += num;}
+
+
+
 
         // Copy Assignment Operator.
         Team & operator=(const Team &other_team){

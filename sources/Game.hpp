@@ -10,20 +10,21 @@
 class Game{
     
     private:
-        Team home_team;
-        Team out_team;
+        Team *home_team;
+        Team *out_team;
         int home_score;
         int out_score;
         bool finish_stats; // 0 for game hasn't finished, 1 for game is finished.  
 
     public:
-        Game(Team home, Team out): 
+        Game();
+        Game(Team *home, Team *out): 
             finish_stats(false), home_score(-1), out_score(-1){
-                if(home == out){
+                if(*(home) == *(out)){
                     throw std::invalid_argument("Same team cant play against it self.");
                 }
-                this->home_team = std::move(home);
-                this->out_team = std::move(out);
+                this->home_team = home;
+                this->out_team = out;
             }
         Game(const Game &game):
             home_team(game.home_team), out_team(game.out_team), finish_stats(game.finish_stats),
@@ -31,13 +32,14 @@ class Game{
         ~Game(){}
         
         // Get Functions for The teams, return a reffrence to the team.
-        Team *getHomeTeam(){return &(this->home_team);}
-        Team *getOutTeam(){return &(this->out_team);}
+        Team *getHomeTeam(){return (this->home_team);}
+        Team *getOutTeam(){return (this->out_team);}
+
+        void setHomeTeam(Team *h_team);
+        void setOutTeam(Team *o_team);
 
         // Get Game Stats (Finished or Not).
-        bool isFinished() const{
-            return this->finish_stats;
-        }
+        bool isFinished() const{return this->finish_stats;}
         
         // Getters for Scores;
         int getHomeScore() const{
@@ -55,10 +57,16 @@ class Game{
          */
         int winner();
 
+        /**
+         * @brief Function for clearing the game data -> for reusing this game object.
+         */
+        void clear();
+
         // Copy Assignment Operator.
         Game & operator=(const Game &other_game){
-            this->home_team = other_game.home_team;
-            this->out_team = other_game.out_team;
+            Game tmp_g(other_game);
+            this->home_team = tmp_g.getHomeTeam();
+            this->out_team = tmp_g.getOutTeam();
             this->finish_stats =other_game.finish_stats;
             this->home_score = other_game.home_score;
             this->out_score = other_game.out_score;
@@ -74,9 +82,9 @@ class Game{
         //Overloading the << Operator for Game.
         friend std::ostream& operator<<(std::ostream& _os, Game& game){
             if(! game.finish_stats){
-                _os << game.home_team.getName() << " vs " << game.out_team.getName() << " Hasn't Finished !";    
+                _os << game.home_team->getName() << " vs " << game.out_team->getName() << " Hasn't Finished !";    
             }else{
-                _os << game.home_team.getName() << " vs " << game.out_team.getName() << " :\n";
+                _os << game.home_team->getName() << " vs " << game.out_team->getName() << " :\n";
                 _os << "    Game stats:\n" << "        ";
                 _os<< game.getHomeTeam()->getName()<<": "<< game.home_score <<" | "<< game.getOutTeam()->getName() << ": "<<game.out_score <<std::endl;
                 if(game.home_score >= game.out_score){
@@ -88,4 +96,5 @@ class Game{
             }
             return _os;
         }
+
 };

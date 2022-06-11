@@ -20,15 +20,15 @@ int main(){
     cout << team_c << endl << team_d << endl;
     
     // Create Game A vs B
-    Game game1(team_a,team_b);
+    Game game1(&team_a,&team_b);
     game1.winner();
     cout << game1 << endl;
     // Create Game C vs D
-    Game game2(team_c,team_d);
+    Game game2(&team_c,&team_d);
     game2.winner();
     cout << game2 << endl;
     // Create Game A vs C
-    Game game3(team_c,team_a);
+    Game game3(&team_c,&team_a);
     game3.winner();
     cout << game3 << endl;
 

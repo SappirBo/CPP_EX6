@@ -6,6 +6,7 @@
 #include "sources/Team.hpp"
 #include "sources/Game.hpp"
 #include "sources/Leauge.hpp"
+#include "sources/Schedule.hpp"
 // Since I use Clang 14, the old version of docktest doesnt compile so 
 // I have the newest docktest addition, and the one from the task renamed: 'docktest_old.h'.
 #include "doctest.h" 
@@ -43,12 +44,12 @@ TEST_CASE("Class Game"){
     Team team_a("team A",0.66);
     Team team_b("team B", 0.33);
     // Check Argument Constractors
-    CHECK_NOTHROW(Game nothrow_game(team_a,team_b););
-    Game game(team_a,team_b);
+    CHECK_NOTHROW(Game nothrow_game(&team_a,&team_b););
+    Game game(&team_a,&team_b);
 
     // CHECK if the Game id finished (expectin gto get false).
     CHECK_FALSE(game.isFinished());
-
+    
     //CHeck Winner Function.
     int winner = game.winner();
     CHECK_FALSE(!(winner==1 || winner==0));
@@ -134,6 +135,10 @@ TEST_CASE("Class Leauge"){
 
 }
 
-TEST_CASE("Class "){
+TEST_CASE("Class Schedule "){
     cout << "----- ----- ----- Test 4 ----- ----- -----\n";
+
+    // Checking the Schedule Constractor.
+    Leauge test_leauge;
+    CHECK_NOTHROW(Schedule sch(&test_leauge));
 }
