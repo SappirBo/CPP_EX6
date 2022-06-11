@@ -5,6 +5,7 @@
 #include <string>
 #include "sources/Team.hpp"
 #include "sources/Game.hpp"
+#include "sources/Leauge.hpp"
 // Since I use Clang 14, the old version of docktest doesnt compile so 
 // I have the newest docktest addition, and the one from the task renamed: 'docktest_old.h'.
 #include "doctest.h" 
@@ -66,6 +67,73 @@ TEST_CASE("Class Game"){
 
 TEST_CASE("Class Leauge"){
     cout << "----- ----- ----- Test 3 ----- ----- -----\n";
+    //Create Leauge with defualt constractor.
+    Leauge first;
+    // Expecting this Leauge size will be 20;
+    CHECK_EQ(first.size(), 20);
+
+
+    // Create Leauge With half vector.
+    Team team_a1("a1",HALF);
+    Team team_a2("a2",HALF);
+    Team team_a3("a3",HALF);
+    Team team_a4("a4",HALF);
+    Team team_a5("a5",HALF);
+    Team team_a6("a6",HALF);
+    Team team_a7("a7",HALF);
+
+    vector<Team> sevenTeamVec = {team_a1,team_a2,team_a3,team_a4,team_a5,team_a6,team_a7};
+    Leauge halfVec(&sevenTeamVec);
+    /**
+     *  Now the 'halfVec' Leauge was initialized with 7 teams vector, means the constractor need to fix it and 
+     * add 13 more to make a 20 Teams Leauge. So halfVec size need to still be 20.
+     *  Also we will Check if the first 7 teams in the leauge is the same 7 teams we created.
+     */
+
+    CHECK_EQ(halfVec.size(),20);
+    size_t index = 0;
+    for(; index<sevenTeamVec.size(); index++){
+        CHECK_EQ(halfVec.getTeams_vec().at(index), sevenTeamVec.at(index));
+    }
+
+    // Create Leauge With full vector and Print the result.
+    Team team_a8("a8",HALF);
+    Team team_a9("a9",HALF);
+    Team team_a10("a10",HALF);
+    Team team_a11("a11",HALF);
+    Team team_a12("a12",HALF);
+    Team team_a13("a13",HALF);
+    Team team_a14("a14",HALF);
+    Team team_a15("a15",HALF);
+    Team team_a16("a16",HALF);
+    Team team_a17("a17",HALF);
+    Team team_a18("a18",HALF);
+    Team team_a19("a19",HALF);
+    Team team_a20("a20",HALF);
+
+    vector<Team> fullTeamVec = {team_a1,team_a2,team_a3,team_a4,team_a5,team_a6,team_a7,team_a8,team_a9,team_a10,
+                                team_a11,team_a12,team_a13,team_a14,team_a15,team_a16,team_a17,team_a18,team_a19,team_a20};
+    Leauge fullVec(&fullTeamVec);
+    
+    /**
+     * Now the 'fullVec' Leauge was initialized with exacly 20 teams vector.
+     * we will Check if the 20 teams in the leauge is the same 20 teams we created.
+     */
+    CHECK_EQ(fullVec.size(),20);
+    index = 0;
+    for(; index<fullTeamVec.size(); index++){
+        CHECK_EQ(fullVec.getTeams_vec().at(index), fullTeamVec.at(index));
+    }
+
+    // Check for vector bigger than 20;
+    Team team_a21("a21",HALF);
+    fullTeamVec.push_back(team_a21);
+    
+    // // Check That throw exeption.
+    // CHECK_THROWS(Leauge leage(&fullTeamVec););
+
 }
 
-
+TEST_CASE("Class "){
+    cout << "----- ----- ----- Test 4 ----- ----- -----\n";
+}

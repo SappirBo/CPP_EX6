@@ -22,9 +22,13 @@ class Leauge{
         // Destractor.
         ~Leauge(){}
 
+        // Return the amount of teams in this Leauge (Basicly it is for Testing).
+        size_t size() const {return this->team_list.size();}
+
+        std::vector<Team> getTeams_vec() const{return this->team_list;}
+
         // Copy Assignment Operator.
         Leauge & operator=(const Leauge &other_Leauge);
-        
         // Move Constructor.
         Leauge (Leauge &&) = default;	
         
