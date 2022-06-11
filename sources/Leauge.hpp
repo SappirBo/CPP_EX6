@@ -12,16 +12,31 @@ class Leauge{
         std::vector<Team> team_list;
 
     public:
+        // Defualt Constractor.
         Leauge();
-        Leauge(std::vector<Team> const *t);
+        // Argumented Constractor.
+        Leauge(std::vector<Team> const *teams);
+        // Copy Constractor.
+        Leauge(const Leauge &leauge):
+            team_list(leauge.team_list){}
+        // Destractor.
         ~Leauge(){}
 
-        friend std::ostream& operator<<(std::ostream& os, Leauge& T){
-            size_t i;
-            for(i=0;i<20;i++){
-                os << "     " << T.team_list.at(i) << std::endl;
+        // Copy Assignment Operator.
+        Leauge & operator=(const Leauge &other_Leauge);
+        
+        // Move Constructor.
+        Leauge (Leauge &&) = default;	
+        
+        // Move assignment Operator.
+        Leauge& operator=(Leauge&& other) = default;
+
+        friend std::ostream& operator<<(std::ostream& _os, Leauge& team){
+            size_t index=0;
+            for(;index<MAX_LEAUGE; index++){
+                _os << "     " << team.team_list.at(index) << std::endl;
             }
-            return os;
+            return _os;
         }
 
 };

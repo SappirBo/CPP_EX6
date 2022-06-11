@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// Basic Contain Helper.
 int contain(int arr[],int num, int size){
     int i;
     for(i=0; i<size; i++){
@@ -16,7 +17,7 @@ int contain(int arr[],int num, int size){
     return 0;
 }
 
-
+// Defualt Constractor.    
 Leauge::Leauge(){
     int ids[20];
     size_t i;
@@ -33,25 +34,26 @@ Leauge::Leauge(){
     }
 }
 
-Leauge::Leauge(vector<Team> const *t){
+// Argumented Constractor.
+Leauge::Leauge(vector<Team> const *teams){
     // Check if the given Vector is larger then 20.
-    if(t->size() > 20){
+    if(teams->size() > 20){
         throw invalid_argument("Team List Must Be Equal or smaller then 20!");
     }
     // If the team vector is exacly 20
-    if(t->size() == 20){
+    if(teams->size() == 20){
         size_t i;
         for(i=0; i<20; i++){
-            this->team_list.push_back(t->at(i));
+            this->team_list.push_back(teams->at(i));
         }
     }
     // If we Missing some Teams in are vector, we add the missing teams.
     else{
-        int missing = 20 - t->size();
+        int missing = 20 - teams->size();
         // Push the teams we already got.
         size_t i;
-        for(i=0; i<t->size(); i++){
-            this->team_list.push_back(t->at(i));
+        for(i=0; i<teams->size(); i++){
+            this->team_list.push_back(teams->at(i));
         }
         // add the remain,
         int ids[missing];
@@ -59,7 +61,7 @@ Leauge::Leauge(vector<Team> const *t){
             ids[i] = -1;
         }
         i=0;
-        while(this->team_list.size() != 20){
+        while(this->team_list.size() != MAX_LEAUGE){
             Team tmp;
             if(!contain(ids,tmp.getID(),missing)){
                 ids[i] = tmp.getID();
@@ -69,6 +71,17 @@ Leauge::Leauge(vector<Team> const *t){
         }
     }
 }
+
+// Copy Assignment Operator.
+Leauge & Leauge::operator=(const Leauge &other_Leauge){
+    size_t index = 0;
+    for(;index < MAX_LEAUGE; index++){
+        this->team_list.push_back(other_Leauge.team_list.at(index));
+    }
+    return *this;
+}
+
+
 
 
 

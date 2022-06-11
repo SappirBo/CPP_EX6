@@ -8,6 +8,7 @@
 #include <array>
 
 // Settingup const numbers (As the Format tidy suggests).
+constexpr int MAX_LEAUGE = 20;
 constexpr int FORTY = 40;
 constexpr int ONE_HUNDRED_AND_ONE = 101;
 constexpr int HUNDRED = 100;

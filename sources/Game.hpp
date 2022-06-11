@@ -18,11 +18,12 @@ class Game{
 
     public:
         Game(Team home, Team out): 
-            home_team(std::move(home)), out_team(std::move(out)), finish_stats(false),
-            home_score(-1), out_score(-1){
+            finish_stats(false), home_score(-1), out_score(-1){
                 if(home == out){
                     throw std::invalid_argument("Same team cant play against it self.");
                 }
+                this->home_team = std::move(home);
+                this->out_team = std::move(out);
             }
         Game(const Game &game):
             home_team(game.home_team), out_team(game.out_team), finish_stats(game.finish_stats),
@@ -35,8 +36,7 @@ class Game{
 
         // Get Game Stats (Finished or Not).
         bool isFinished() const{
-            if(this->finish_stats == 0){return false;}
-            else{return true;}
+            return this->finish_stats;
         }
         
         // Getters for Scores;
