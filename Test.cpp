@@ -63,3 +63,9 @@ TEST_CASE("Class Game"){
     CHECK_FALSE(!game.isFinished());
     
 }
+
+TEST_CASE("Class Leauge"){
+    cout << "----- ----- ----- Test 3 ----- ----- -----\n";
+}
+
+
