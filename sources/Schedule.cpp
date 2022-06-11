@@ -31,6 +31,8 @@ void Schedule::runRound(){
         tmp_game.winner();
     }
     this->Round++;
+    this->leauge_ptr->setRound(this->getRound());
+    
 }
 
 

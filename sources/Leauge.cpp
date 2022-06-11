@@ -18,7 +18,7 @@ int contain(int arr[],int num, int size){
 }
 
 // Defualt Constractor.    
-Leauge::Leauge(){
+Leauge::Leauge():Round(0){
     int ids[20];
     size_t i;
     for(i=0; i<20; i++){
@@ -35,7 +35,7 @@ Leauge::Leauge(){
 }
 
 // Argumented Constractor.
-Leauge::Leauge(vector<Team> const *teams){
+Leauge::Leauge(vector<Team> const *teams):Round(0){
     // Check if the given Vector is larger then 20.
     if(teams->size() > 20){
         throw invalid_argument("Team List Must Be Equal or smaller then 20!");
@@ -108,32 +108,42 @@ vector<size_t> Leauge::getSortedIndexVector(){
     return ans;
 }
 
-
-
 std::string Leauge::getStats(){
     string ans = "";
     vector<size_t> indexs = getSortedIndexVector();
     for(size_t i=0; i<MAX_LEAUGE; i++){
         string s = "";
-        s += to_string(i);
+        s += to_string(i+1);
         s += ". ";
         s += this->getTeams_vec()->at(indexs.at(i)).getName();
         while(s.size() < 30){
             s += " ";
         }
+        ans += s;
+        s.clear();
         s += "| Points: ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getPoints() );
-        while(s.size() < TEN+1){
+        while(s.size() < TEN+5){
             s += " ";
         }
+        ans += s;
+        s.clear();
         s += "| Balls: ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getErned_Score());
-        while(s.size() < TEN+1){
+        while(s.size() < TEN+5){
             s += " ";
         }
         s += "/ ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score());
-
+        ans += s;
+        s.clear();
+        while(s.size() <TEN-5){
+            s += " ";
+        }
+        s += " | Success rate: ";
+        double num = (double)(this->getTeams_vec()->at(indexs.at(i)).getPoints()) / this->Round;
+        s += to_string((int) (num*HUNDRED));
+        s += "%";
         ans += s;
         ans += "\n"; 
     }

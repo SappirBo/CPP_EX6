@@ -10,6 +10,7 @@
 class Leauge{
     private:
         std::vector<Team> team_list;
+        int Round;
 
     public:
         // Defualt Constractor.
@@ -18,7 +19,7 @@ class Leauge{
         Leauge(std::vector<Team> const *teams);
         // Copy Constractor.
         Leauge(const Leauge &leauge):
-            team_list(leauge.team_list){}
+            team_list(leauge.team_list), Round(leauge.Round){}
         // Destractor.
         ~Leauge(){}
 
@@ -33,6 +34,8 @@ class Leauge{
             std::vector<Team>* list_ptr = &this->team_list;
             return list_ptr;
         }
+
+        void setRound(int round){this->Round = round;}
 
         // Copy Assignment Operator.
         Leauge & operator=(const Leauge &other_Leauge);
