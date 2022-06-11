@@ -28,7 +28,7 @@ int main(){
     game2.winner();
     cout << game2 << endl;
     // Create Game A vs C
-    Game game3(team_c,team_c);
+    Game game3(team_c,team_a);
     game3.winner();
     cout << game3 << endl;
 

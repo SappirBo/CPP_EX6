@@ -23,12 +23,29 @@ int Game::winner(){
     double score1 = this->getHomeTeam()->getRate() + num1;
     double score2 = this->getOutTeam()->getRate() + num2;
     
+    // Setting the Scores to be in range from 50 to 100.
+    score1 = score1*HUNDRED;
+    score2 = score2*HUNDRED;
+    if(score1 > HUNDRED){
+        score1 = HUNDRED;
+    }
+    if(score1 < FIFTY_FIVE){
+        score1 = FIFTY_FIVE;
+    }
+    if(score2 > HUNDRED){
+        score2 = HUNDRED;
+    }
+    if(score2 < FIFTY){
+        score2 = FIFTY;
+    }
+    
+
     // Passind the Final Scores.
-    this->home_score = score1;
-    this->out_score = score2;
+    this->home_score = (int) score1;
+    this->out_score = (int) score2;
     this->finish_stats = 1;
 
-
+    // Return the Finle winner (0 If Home team won, 1 if Out team won).
     if(score1 >= score2){
         return 0;
     }else{

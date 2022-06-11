@@ -13,14 +13,14 @@ SOURCES=$(wildcard $(SOURCE_PATH)/*.cpp)
 HEADERS=$(wildcard $(SOURCE_PATH)/*.hpp)
 OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
-run: main
+run: main test
 	./$^
 
 main: main.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 test: TestCounter.o Test.o $(OBJECTS)
-	$(CXX) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 tidy:
 	clang-tidy $(HEADERS) $(TIDY_FLAGS) --

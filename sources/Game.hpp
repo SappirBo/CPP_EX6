@@ -12,14 +12,18 @@ class Game{
     private:
         Team home_team;
         Team out_team;
-        double home_score;
-        double out_score;
+        int home_score;
+        int out_score;
         bool finish_stats; // 0 for game hasn't finished, 1 for game is finished.  
 
     public:
         Game(Team home, Team out): 
             home_team(std::move(home)), out_team(std::move(out)), finish_stats(false),
-            home_score(-1), out_score(-1){}
+            home_score(-1), out_score(-1){
+                if(home == out){
+                    throw std::invalid_argument("Same team cant play against it self.");
+                }
+            }
         Game(const Game &game):
             home_team(game.home_team), out_team(game.out_team), finish_stats(game.finish_stats),
             home_score(-1), out_score(-1){}
@@ -28,6 +32,20 @@ class Game{
         // Get Functions for The teams, return a reffrence to the team.
         Team *getHomeTeam(){return &(this->home_team);}
         Team *getOutTeam(){return &(this->out_team);}
+
+        // Get Game Stats (Finished or Not).
+        bool isFinished() const{
+            if(this->finish_stats == 0){return false;}
+            else{return true;}
+        }
+        
+        // Getters for Scores;
+        int getHomeScore() const{
+            return this->home_score;
+        }
+        int getOutScore() const{
+            return this->out_score;
+        }
 
         /**
          * @brief function for creating a match and  get a winner of the match,

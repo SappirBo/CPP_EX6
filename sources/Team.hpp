@@ -11,6 +11,8 @@
 constexpr int FORTY = 40;
 constexpr int ONE_HUNDRED_AND_ONE = 101;
 constexpr int HUNDRED = 100;
+constexpr int FIFTY = 50;
+constexpr int FIFTY_FIVE = 55;
 constexpr double HALF = 0.5;
 constexpr double A_THIRD = 0.33;
 
@@ -61,7 +63,12 @@ class Team{
             this->ID = (int) index;
         }
         // Argumented Constractor.
-        Team(std::string Name, double Rate): name(std::move(Name)), rate(Rate), ID(-1){}
+        Team(std::string Name, double Rate): name(std::move(Name)), ID(-1){
+            if(rate > 1 || rate < 0){
+                throw std::invalid_argument("Rate Must Be In Range [0,1]!.");
+            }
+            this->rate = Rate;
+        }
         // Copy Constractor.
         Team(const Team &other_team): 
             name(std::move(other_team.getName())), rate(other_team.getRate()),ID(other_team.getID()){}
@@ -87,6 +94,8 @@ class Team{
         // Move assignment Operator.
         Team& operator=(Team&& other) = default;
         
+        friend bool operator==(const Team &team1, const Team &team2);
+
         //Overloading the << Operator for Team.
         friend std::ostream& operator<<(std::ostream& _os, Team& team){
             _os << "Name: "<< team.getName() << ", Rate: " << team.getRate();

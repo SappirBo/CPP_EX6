@@ -21,3 +21,16 @@ double random_team_rate(){
     num = num/HUNDRED;
     return num;
 }
+
+
+bool operator==(const Team &team1, const Team &team2){
+    // Means both teams came from same place in the Team_list.
+    if(team1.getID() ==team2.getID() && team1.getID() != -1){
+        return true;
+    }else{
+        if(team1.getName()==team2.getName() && team1.getRate()==team2.getRate()){
+            return true;
+        }
+    }
+    return false;
+}
