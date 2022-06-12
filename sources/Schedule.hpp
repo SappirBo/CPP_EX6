@@ -10,6 +10,10 @@
 #include "Game.hpp"
 #include "Leauge.hpp"
 
+/**
+ * @brief Schedule class for run the leauge, set the matches and print result and satistics.
+ * It has a pointer to a Leauge Object, two arrays (vectors) for seting matches, and Rounds counter.
+ */
 class Schedule{
     private:
         Leauge *leauge_ptr;
@@ -30,8 +34,18 @@ class Schedule{
          */
         void runSeason();
 
+        /**
+         * @brief Ordering the next matches in the Leauge,
+         * Follows the 'Round-robin tournament' (https://en.wikipedia.org/wiki/Round-robin_tournament).
+         * after each round, this function will be called and set up the matches for the next round.
+         */
         void next_game_reorder();
 
+        /**
+         * @brief Get the current Round number
+         * 
+         * @return int - The Current Round.
+         */
         int getRound() const {return this->Round;}
 
         friend std::ostream& operator<<(std::ostream& _os, Schedule& sch);

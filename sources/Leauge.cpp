@@ -189,16 +189,26 @@ std::string Leauge::getStats(){
         while(s.size() < TEN+3){
             s += " ";
         }
+        ans+=s;
+        s.clear();
         s += "/ ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score());
+        while(s.size() < 6){
+            s += " ";
+        }
         ans += s;
         s.clear();
 
         // Addind Success rate of wins / amount of games. 
         s += " | Success rate: ";
+        ans += s;
+        s.clear();
         num = (double)(this->getTeams_vec()->at(indexs.at(i)).getPoints()) / this->Round;
         s += to_string((int) (num*HUNDRED));
         s += "%";
+        while(s.size() < 4){
+            s += " ";
+        }
         ans += s;
         s.clear();
 
@@ -208,7 +218,7 @@ std::string Leauge::getStats(){
         num = num/100;
         num = (num / (double) this->getTeams_vec()->at(indexs.at(i)).getRate());
         num *= 100000;
-        num = num / 1000;;
+        num = num / 1000;
         s += to_string(num);
         size_t index = s.size();
         while(index > 13){
@@ -225,6 +235,9 @@ std::string Leauge::getStats(){
     }
     return ans;
 }
+
+
+// string of all the wins / lose streks (active or all time).
 
 string Leauge::active_win_streak(){
     size_t index=0;

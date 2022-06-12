@@ -77,7 +77,6 @@ void Schedule::runRound(){
     this->Round++;
     this->leauge_ptr->setRound(this->getRound());
     this->next_game_reorder();
-    
 }
 
 void Schedule::runSeason(){
