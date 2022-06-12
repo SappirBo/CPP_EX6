@@ -6,7 +6,11 @@
 #include <string>
 #include "Team.hpp"
 
-
+/**
+ * @brief Game Object represent a game, it has Two Team pointers (after the game is over, ypu passing data to the Teams).
+ * One pointer is to the home team, the other is to the guest team (and somehow I called it Out team for some reason).
+ * this Game has as well a finish stats (as boolean) and two score ints.
+ */
 class Game{
     
     private:

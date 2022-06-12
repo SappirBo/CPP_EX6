@@ -7,6 +7,11 @@
 #include "Team.hpp"
 #include "Game.hpp"
 
+/**
+ * @brief This Leauge class is Hold Vector of Teams , and round counter,
+ * the leage can run for 40 rounds (amount of game you need for each team will play against all other 
+ * teams exacly two times: one as host and one as guest).
+ */
 class Leauge{
     private:
         std::vector<Team> team_list;
@@ -18,16 +23,26 @@ class Leauge{
         // Argumented Constractor.
         Leauge(std::vector<Team> const *teams);
         // Copy Constractor.
-        Leauge(const Leauge &leauge):
-            team_list(leauge.team_list), Round(leauge.Round){}
+        Leauge(const Leauge &leauge);
         // Destractor.
         ~Leauge(){}
 
         // Return the amount of teams in this Leauge (Basicly it is for Testing).
         size_t size() const {return this->team_list.size();}
-
+        
         std::string getStats();
 
+        /**
+         * @brief This is sorting function as Helper for the Get Stats.
+         * This function will sort the teams by the amount of points they have, and if two teams have exacly the same score 
+         * it will sort them by the earned score they gained.
+         * 
+         * @return vector<size_t> = vector of the INDEXS of the sorted list. 
+         *                          For Example: if New York Knicks is number 1 in the ranking, but on the Leauge Vector it's index is 15,
+         *                                       the returned Vector will have 15 in the 0 (first) index. AKA: ans.at(0) = 15;
+         * 
+         * The Time Complexity of this function is O(1), since we have constant Vector size (20 elements). 
+         */
         std::vector<size_t> getSortedIndexVector();
 
         std::vector<Team>* getTeams_vec() {

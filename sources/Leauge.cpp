@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// *** *** *** *** Helpers *** *** *** ***
 // Basic Contain Helper.
 int contain(int arr[],int num, int size){
     int i;
@@ -16,6 +17,15 @@ int contain(int arr[],int num, int size){
     }
     return 0;
 }
+
+// Basic Swap Helper.
+void swap(vector<size_t> *arr, size_t i, size_t j){
+    size_t tmp = arr->at(i);
+    arr->at(i) = arr->at(j);
+    arr->at(j) = tmp;
+}
+
+// ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** 
 
 // Defualt Constractor.    
 Leauge::Leauge():Round(0){
@@ -72,6 +82,11 @@ Leauge::Leauge(vector<Team> const *teams):Round(0){
     }
 }
 
+// Copy Constractor.
+Leauge::Leauge(const Leauge &leauge):
+            team_list(leauge.team_list), Round(leauge.Round){}
+
+
 // Copy Assignment Operator.
 Leauge & Leauge::operator=(const Leauge &other_Leauge){
     size_t index = 0;
@@ -81,13 +96,17 @@ Leauge & Leauge::operator=(const Leauge &other_Leauge){
     return *this;
 }
 
-void swap(vector<size_t> *arr, size_t i, size_t j){
-    size_t tmp = arr->at(i);
-    arr->at(i) = arr->at(j);
-    arr->at(j) = tmp;
-}
-
-// O(1).
+/**
+ * @brief This is sorting function as Helper for the Get Stats.
+ * This function will sort the teams by the amount of points they have, and if two teams have exacly the same score 
+ * it will sort them by the earned score they gained.
+ * 
+ * @return vector<size_t> = vector of the INDEXS of the sorted list. 
+ *                          For Example: if New York Knicks is number 1 in the ranking, but on the Leauge Vector it's index is 15,
+ *                                       the returned Vector will have 15 in the 0 (first) index. AKA: ans.at(0) = 15;
+ * 
+ * The Time Complexity of this function is O(1), since we have constant Vector size (20 elements). 
+ */
 vector<size_t> Leauge::getSortedIndexVector(){
     vector<size_t> ans = {0,1,2,3,4,5,6,7,8,9,
                             10,11,12,13,14,15,16,17,18,19};
@@ -108,6 +127,18 @@ vector<size_t> Leauge::getSortedIndexVector(){
     return ans;
 }
 
+/**
+ * @brief this is a function for getting this leauge stats at this point (in this round).
+ * for each team it returns:
+ *                          1. current rank
+ *                          2. Win / Lose  
+ *                          3. Goal Ratio (score this team had divide by the amount they could do (round*110)).
+ *                          4. Scores (Amount of total scores they have).
+ *                          5. Success rate (the amount of points divide by the rounds (wins/all games)).           
+ *                          6. Var (Diffrence between the teams rate to the Goal Ratio).
+ *                          7. Average Score per Game.
+ * @return std::string 
+ */
 std::string Leauge::getStats(){
     string ans = "";
     double num = 0;
@@ -185,6 +216,11 @@ std::string Leauge::getStats(){
             index--;
         }
         ans += s ;
+        s.clear();
+        s += "| Ave Score : ";
+        s += to_string(this->getTeams_vec()->at(indexs.at(i)).getErned_Score()/this->Round);
+        ans += s;
+
         ans += "\n"; 
     }
     return ans;
