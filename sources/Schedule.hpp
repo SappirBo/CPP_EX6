@@ -30,6 +30,8 @@ class Schedule{
          */
         void runSeason();
 
+        void next_game_reorder();
+
         int getRound() const {return this->Round;}
 
         friend std::ostream& operator<<(std::ostream& _os, Schedule& sch);

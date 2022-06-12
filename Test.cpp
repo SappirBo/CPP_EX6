@@ -94,7 +94,7 @@ TEST_CASE("Class Leauge"){
     CHECK_EQ(halfVec.size(),20);
     size_t index = 0;
     for(; index<sevenTeamVec.size(); index++){
-        CHECK_EQ(halfVec.getTeams_vec().at(index), sevenTeamVec.at(index));
+        CHECK_EQ(halfVec.getTeams_vec()->at(index), sevenTeamVec.at(index));
     }
 
     // Create Leauge With full vector and Print the result.
@@ -123,7 +123,7 @@ TEST_CASE("Class Leauge"){
     CHECK_EQ(fullVec.size(),20);
     index = 0;
     for(; index<fullTeamVec.size(); index++){
-        CHECK_EQ(fullVec.getTeams_vec().at(index), fullTeamVec.at(index));
+        CHECK_EQ(fullVec.getTeams_vec()->at(index), fullTeamVec.at(index));
     }
 
     // Check for vector bigger than 20;
