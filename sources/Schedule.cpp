@@ -80,17 +80,30 @@ void Schedule::runRound(){
     
 }
 
-
+void Schedule::runSeason(){
+    if(this->Round >= FORTY){
+        throw invalid_argument("Season Already Over!");
+    }else{
+        while(this->Round < 40){
+            this->runRound();
+        }
+    }
+}
 
 
 std::ostream& operator<<(std::ostream& _os, Schedule& sch){
     if(sch.Round == 0){
         _os << "Schedule Haven't Started!";
     }else{
-        _os << "***** ***** ***** ***** Schedule Details: ***** ***** ***** *****\n";
-        _os << "Schedule Rounds: " << sch.getRound() << " / 40 .\n";
-        _os << "Full Details:\n";
-        _os << sch.leauge_ptr->getStats() << "\n\n";
+        _os << "\n***** ***** ***** ***** Schedule Details: ***** ***** ***** *****\n\n";
+        _os << "Schedule Rounds: " << sch.getRound() << " / 40 .\n\n";
+        _os << "      ***** Full Details: *****\n\n";
+        _os << sch.leauge_ptr->getStats() << "\n";
+        _os << "                  ***** Streak Details: *****\n\n";
+        _os << "    - Longest Win Streak : " << sch.leauge_ptr->best_win_streak() << "\n";
+        _os << "    - Longest Lose Streak: " << sch.leauge_ptr->best_lose_streak() << "\n\n";
+        _os << "    - Longest Active Win Streak : " << sch.leauge_ptr->active_win_streak() << "\n";
+        _os << "    - Longest Active Lose Streak: " << sch.leauge_ptr->active_lose_streak() << "\n";
     }
     return _os;
 }

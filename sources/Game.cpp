@@ -6,7 +6,7 @@
 #include "Game.hpp"
 
 
-
+// Defult Constractor (Build Empty Game).
 Game::Game(){
     this->home_team = NULL;
     this->out_team = NULL;
@@ -15,8 +15,27 @@ Game::Game(){
     this->finish_stats = false;
 }
 
+// Argumented Constractor.
+Game::Game(Team *home, Team *out): 
+            finish_stats(false), home_score(-1), out_score(-1){
+    if(*(home) == *(out)){
+        throw std::invalid_argument("Same team cant play against it self.");
+    }
+    this->home_team = home;
+    this->out_team = out;
+}
+
+// Copy Constractor.
+Game::Game(const Game &game):
+            home_team(game.home_team), out_team(game.out_team), finish_stats(game.finish_stats),
+            home_score(-1), out_score(-1){}
 
 
+/**
+ * @brief Set Home team.
+ * 
+ * @param h_team pointer to the Team we want to add.
+ */
 void Game::setHomeTeam(Team *h_team){
     if(this->finish_stats || home_team != NULL){
         throw std::invalid_argument("Game is inittialized allready!");
@@ -24,6 +43,13 @@ void Game::setHomeTeam(Team *h_team){
     this->home_team = h_team;
     this->home_score = 0;
 }
+
+
+/**
+ * @brief Set Out Team.
+ * 
+ * @param o_team pointer to the Team we want to add.
+ */
 void Game::setOutTeam(Team *o_team){
     if(this->finish_stats || this->out_team != NULL){
         throw std::invalid_argument("Game is inittialized allready!");
@@ -82,10 +108,12 @@ int Game::winner(){
 
     // Return the Finle winner (0 If Home team won, 1 if Out team won).
     if(score1 >= score2){
-        this->home_team->raisePoint();
+        this->home_team->raisePoint(0);
+        this->out_team->raisePoint(1);
         return 0;
     }else{
-        this->out_team->raisePoint();
+        this->out_team->raisePoint(0);
+        this->home_team->raisePoint(1);
         return 1;
     }
 

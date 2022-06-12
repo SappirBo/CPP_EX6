@@ -14,15 +14,10 @@ int main(){
     Leauge leauge1;
 
     Schedule sch(&leauge1);
-    for(int i=0;i<40;i++){
-        sch.runRound();
-    }
-    cout << sch << endl;
 
-    // for(int i=0;i<20;i++){
-    //     sch.runRound();
-    // }
-    // cout << sch << endl;
+    sch.runSeason();
+
+    cout << sch << endl;
 
     return -1;
 }

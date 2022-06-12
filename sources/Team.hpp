@@ -47,39 +47,38 @@ double random_team_rate();
 /**
  * @brief This class Represent Basketball Team.
  * each team have a name (as String), and rate (as double, the rate is a number belonging to the group [0,1]).
+ * rate = the rate this team has (as double, the rate is a number belonging to the group [0,1]).
+ * ID = The Index of the team in the team name array, if it is not in the array it is -1.
+ * total_Earned_score, total_Absorbed_score = This counts the total Earned and Absorbed Scores after each game.
+ * points = THe points this Tean has in this point
+ * *_win/lose_streks = Data for keeping the win/lose streaks.
  */
 class Team{
     private:
         std::string name;
         double rate;
-        int ID; // The Index of the team in the team name array, if it is not in the array it is -1;
+        int ID; 
         int total_Earned_score;
         int total_Absorbed_score;
         int points;
+        int active_win_streak;
+        int active_lose_streak;
+        int max_win_streak;
+        int max_lose_streak;
     
     public:
         /**
          * @brief Defult Constructor For Team object,
          *        Creating New Random Team with a Random Rate: Using 'random_team_rate()' and 'random_team_index()'.
          */
-        Team(): rate(random_team_rate()) ,total_Earned_score(0),
-                total_Absorbed_score(0), points(0){
-            size_t index = (size_t) random_team_index();
-            this->name = team_names.at(index);
-            this->ID = (int) index;
-        }
+        Team();
+        
         // Argumented Constractor.
-        Team(std::string Name, double Rate): name(std::move(Name)), ID(-1), points(0),
-            total_Earned_score(0),total_Absorbed_score(0){
-            if(rate > 1 || rate < 0){
-                throw std::invalid_argument("Rate Must Be In Range [0,1]!.");
-            }
-            this->rate = Rate;
-        }
+        Team(std::string Name, double Rate);
+        
         // Copy Constractor.
-        Team(const Team &other_team): 
-            name(std::move(other_team.getName())), rate(other_team.getRate()),ID(other_team.getID()),points(other_team.points),
-            total_Absorbed_score(other_team.getAbsorbed_Score()), total_Earned_score(other_team.getErned_Score()) {}
+        Team(const Team &other_team);
+        
         // Destructor For Team Object.
         ~Team(){}
         
@@ -88,14 +87,24 @@ class Team{
         double getRate() const {return this->rate;}
         int getID() const {return this->ID;}
         int getPoints()const {return this->points;}
-        void raisePoint(){this->points += 1;}
-        // Setters / Getters for Erned/Absorbed score.
+
+        // Setters / Getters for Erned / Absorbed score.
         int getErned_Score() const{return this->total_Earned_score;}
         int getAbsorbed_Score() const{return this->total_Absorbed_score;}
         void setErned_Score(int num) {this->total_Earned_score += num;}
         void setAbsorbed_Score(int num) {this->total_Absorbed_score += num;}
+        
+        /**
+         * @brief Function to pass the Game Info fromGame class to Team class,
+         * @param num - return code 0 if the Team won, 1 if the team lose. 
+         */
+        void raisePoint(int num);
 
-
+        // Getters For the win lose arguments.
+        int getActiveWin() const {return this->active_win_streak;}
+        int getActiveLose() const {return this->active_lose_streak;}
+        int getMaxWin() const {return this->max_win_streak;}
+        int getMaxLose() const {return this->max_lose_streak;}
 
 
         // Copy Assignment Operator.
@@ -119,4 +128,5 @@ class Team{
             _os << "Name: "<< team.getName() << ", Rate: " << team.getRate();
             return _os;
         }
+
 };

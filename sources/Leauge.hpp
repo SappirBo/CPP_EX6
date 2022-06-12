@@ -37,6 +37,12 @@ class Leauge{
 
         void setRound(int round){this->Round = round;}
 
+
+        std::string active_win_streak();
+        std::string active_lose_streak();
+        std::string best_win_streak();
+        std::string best_lose_streak();
+
         // Copy Assignment Operator.
         Leauge & operator=(const Leauge &other_Leauge);
         // Move Constructor.
@@ -44,7 +50,7 @@ class Leauge{
         
         // Move assignment Operator.
         Leauge& operator=(Leauge&& other) = default;
-
+        
         friend std::ostream& operator<<(std::ostream& _os, Leauge& team){
             size_t index=0;
             for(;index<MAX_LEAUGE; index++){

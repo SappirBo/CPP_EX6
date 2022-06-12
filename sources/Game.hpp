@@ -18,17 +18,8 @@ class Game{
 
     public:
         Game();
-        Game(Team *home, Team *out): 
-            finish_stats(false), home_score(-1), out_score(-1){
-                if(*(home) == *(out)){
-                    throw std::invalid_argument("Same team cant play against it self.");
-                }
-                this->home_team = home;
-                this->out_team = out;
-            }
-        Game(const Game &game):
-            home_team(game.home_team), out_team(game.out_team), finish_stats(game.finish_stats),
-            home_score(-1), out_score(-1){}
+        Game(Team *home, Team *out);
+        Game(const Game &game);
         ~Game(){}
         
         // Get Functions for The teams, return a reffrence to the team.
@@ -39,15 +30,11 @@ class Game{
         void setOutTeam(Team *o_team);
 
         // Get Game Stats (Finished or Not).
-        bool isFinished() const{return this->finish_stats;}
+        bool isFinished()  const{return this->finish_stats;}
         
         // Getters for Scores;
-        int getHomeScore() const{
-            return this->home_score;
-        }
-        int getOutScore() const{
-            return this->out_score;
-        }
+        int getHomeScore() const{return this->home_score;}
+        int getOutScore()  const{return this->out_score ;}
 
         /**
          * @brief function for creating a match and  get a winner of the match,

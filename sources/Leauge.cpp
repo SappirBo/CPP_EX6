@@ -132,7 +132,7 @@ std::string Leauge::getStats(){
         }
         ans += s;
         s.clear();
-        s += "| Lost: ";
+        s += "| Lose: ";
         s += to_string(this->Round - this->getTeams_vec()->at(indexs.at(i)).getPoints() );
         while(s.size() < TEN+2){
             s += " ";
@@ -190,6 +190,81 @@ std::string Leauge::getStats(){
     return ans;
 }
 
-
+string Leauge::active_win_streak(){
+    size_t index=0;
+    int max = 0;
+    string data = "";
+    for(;index <MAX_LEAUGE; index++){
+        if(this->getTeams_vec()->at(index).getActiveWin() > max){
+            max = this->getTeams_vec()->at(index).getActiveWin();
+            data.clear();
+            data += this->getTeams_vec()->at(index).getName();
+            while(data.size() < 20){
+                data += " ";
+            }
+            data += " [";
+            data += to_string(this->getTeams_vec()->at(index).getActiveWin());
+            data += "].";
+        }
+    }
+    return data;
+}
+string Leauge::active_lose_streak(){
+    size_t index=0;
+    int max = 0;
+    string data = "";
+    for(;index <MAX_LEAUGE; index++){
+        if(this->getTeams_vec()->at(index).getActiveLose() > max){
+            data.clear();
+            data += this->getTeams_vec()->at(index).getName();
+            while(data.size() < 20){
+                data += " ";
+            }
+            data += " [";
+            data += to_string(this->getTeams_vec()->at(index).getActiveLose());
+            data += "].";
+            max = this->getTeams_vec()->at(index).getActiveLose();
+        }
+    }
+    return data;
+}
+string Leauge::best_win_streak(){
+    size_t index=0;
+    int max = 0;
+    string data = "";
+    for(;index <MAX_LEAUGE; index++){
+        if(this->getTeams_vec()->at(index).getMaxWin() > max){
+            max = this->getTeams_vec()->at(index).getMaxWin();
+            data.clear();
+            data += this->getTeams_vec()->at(index).getName();
+            while(data.size() < 20){
+                data += " ";
+            }
+            data += " [";
+            data += to_string(this->getTeams_vec()->at(index).getMaxWin());
+            data += "].";
+        }
+    }
+    return data;
+}
+string Leauge::best_lose_streak(){
+    size_t index=0;
+    int max = 0;
+    string data = "";
+    for(;index <MAX_LEAUGE; index++){
+        if(this->getTeams_vec()->at(index).getMaxLose() > max){
+            max = this->getTeams_vec()->at(index).getMaxLose();
+            data.clear();
+            data += this->getTeams_vec()->at(index).getName();
+            while(data.size() < 20){
+                data += " ";
+            }
+            data += " [";
+            data += to_string(this->getTeams_vec()->at(index).getMaxLose());
+            data += "].";
+        }
+    }
+    return data;
+}
 
 
