@@ -10,5 +10,5 @@ On each Point of the season, you will be able to Stop to get some Analytical inf
 - Success Rate.
 </br>   
 and a lot more.
-
+</br>
 ![Screenshot from 2022-06-12 20-07-05](https://user-images.githubusercontent.com/92790326/173244744-df992623-bf78-440b-963e-cf2732df6e0e.png)
