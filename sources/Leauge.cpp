@@ -113,15 +113,18 @@ std::string Leauge::getStats(){
     double num = 0;
     vector<size_t> indexs = getSortedIndexVector();
     for(size_t i=0; i<MAX_LEAUGE; i++){
+        // Set Team number and Name.
         string s = "";
         s += to_string(i+1);
         s += ". ";
         s += this->getTeams_vec()->at(indexs.at(i)).getName();
-        while(s.size() < 30){
+        while(s.size() < 26){
             s += " ";
         }
         ans += s;
         s.clear();
+        
+        // Set Teams Wins and loses. 
         s += "| Won: ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getPoints() );
         while(s.size() < TEN+1){
@@ -136,7 +139,21 @@ std::string Leauge::getStats(){
         }
         ans += s;
         s.clear();
+
+        // Setting Score Ratio (Amount of score the team have / Amount of Gouls the Team could achived).
         s += "| Goal Ratio: ";
+        s += "(";
+        num = (double) this->getTeams_vec()->at(indexs.at(i)).getErned_Score() / (this->Round*110);
+        s += to_string((int)(num*HUNDRED));
+        s += "%)";
+        while(s.size() < TEN-1){
+            s += " ";
+        }
+        ans += s;
+        s.clear();
+
+        // Setting Erned vd Absorved Scores.
+        s += "| Scores: ";
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getErned_Score());
         while(s.size() < TEN+3){
             s += " ";
@@ -145,23 +162,29 @@ std::string Leauge::getStats(){
         s += to_string(this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score());
         ans += s;
         s.clear();
-        while(s.size() < 2){
-            s += " ";
-        }
-        s += "(";
-        num = (double) this->getTeams_vec()->at(indexs.at(i)).getErned_Score() / this->getTeams_vec()->at(indexs.at(i)).getAbsorbed_Score();
-        s += to_string((int)(num*HUNDRED));
-        s += "%)";
-        while(s.size() < TEN-1){
-            s += " ";
-        }
-        ans += s;
-        s.clear();
+
+        // Addind Success rate of wins / amount of games. 
         s += " | Success rate: ";
         num = (double)(this->getTeams_vec()->at(indexs.at(i)).getPoints()) / this->Round;
         s += to_string((int) (num*HUNDRED));
         s += "%";
         ans += s;
+        s.clear();
+
+        // Adding Var of the success rate in the real world than the rate this Team has.
+        s += "| Var : ";
+        num = (double) this->getTeams_vec()->at(indexs.at(i)).getErned_Score() / (this->Round*110);
+        num = num/100;
+        num = (num / (double) this->getTeams_vec()->at(indexs.at(i)).getRate());
+        num *= 100000;
+        num = num / 1000;;
+        s += to_string(num);
+        size_t index = s.size();
+        while(index > 13){
+            s.erase(index);
+            index--;
+        }
+        ans += s ;
         ans += "\n"; 
     }
     return ans;
