@@ -17,6 +17,9 @@ TEST_CASE("Class Team"){
     cout << "----- ----- ----- Test 1 ----- ----- -----\n";
     // Test for invalid argument
     CHECK_NOTHROW(Team team("test",0.2););
+    // CHECK_THROWS(Team team("test",-0.2););
+    // CHECK_THROWS(Team team("test",11););
+    // CHECK_THROWS(Team team("test",-13););
 
     // Test for argumented constractor.
     Team team_a("Team A",0.5);
@@ -30,10 +33,10 @@ TEST_CASE("Class Team"){
     // Test for Defult Constractor.
     Team team_c;
     Team team_d;
-        // Checking that random rate is between 0 to 1;
+    // Checking that random rate is between 0 to 1;
     CHECK_FALSE(!(team_c.getRate() <= 1 && team_c.getRate() >= 0));
     CHECK_FALSE(!(team_d.getRate() <= 1 && team_d.getRate() >= 0));
-        // Check that the ID between 0 to 39;
+    // Check that the ID between 0 to 39;
     CHECK_FALSE(!(team_c.getID() > -1 && team_c.getID() < 40));
     CHECK_FALSE(!(team_d.getID() > -1 && team_d.getID() < 40));
 
@@ -45,6 +48,7 @@ TEST_CASE("Class Game"){
     Team team_b("team B", 0.33);
     // Check Argument Constractors
     CHECK_NOTHROW(Game nothrow_game(&team_a,&team_b););
+    // CHECK_THROWS(Game nothrow_game(&team_a,&team_a););
     Game game(&team_a,&team_b);
 
     // CHECK if the Game id finished (expectin gto get false).
@@ -143,5 +147,29 @@ TEST_CASE("Class Schedule "){
     CHECK_NOTHROW(Schedule sch(&test_leauge));
 
     Schedule sch(&test_leauge);
-    
+    // Checking runRound Function
+    for(int i=0; i<MAX_LEAUGE; i++){
+        CHECK_NOTHROW(sch.runRound(););
+    }
+    // Check if we are now at round 20
+    CHECK_EQ(20,sch.getRound());
+
+    // Check the runSeason function.
+    sch.runSeason();
+    CHECK_EQ(40,sch.getRound());
+}
+
+TEST_CASE("Full Leauge Season"){
+    cout << "----- ----- ----- Test 5 ----- ----- -----\n";
+    // Create Leauge and Schedule.
+    Leauge test_leauge;
+    Schedule sch(&test_leauge);
+
+    // Run 10 Rounds.
+    int index =0;
+    for(;index<TEN;index++){
+        sch.runRound();
+    }
+    // Check if this leauge Round Changed.
+    CHECK_EQ(10,test_leauge.getRound());
 }

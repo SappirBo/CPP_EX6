@@ -45,13 +45,17 @@ class Leauge{
          */
         std::vector<size_t> getSortedIndexVector();
 
+        /**
+         * @brief Get the Team vector pointer
+         * @return std::vector<Team>* 
+         */
         std::vector<Team>* getTeams_vec() {
             std::vector<Team>* list_ptr = &this->team_list;
             return list_ptr;
         }
 
         void setRound(int round){this->Round = round;}
-
+        int getRound() const {return this->Round;}
 
         std::string active_win_streak();
         std::string active_lose_streak();
