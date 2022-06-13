@@ -75,6 +75,7 @@ int Game::winner(){
     num1 = num1;
     num2 = num2;    
 
+    // Here The Team with the Higher Rate Will have advantage
     double score1 = this->getHomeTeam()->getRate() + num1;
     double score2 = this->getOutTeam()->getRate() + num2;
     

@@ -1,7 +1,7 @@
 #!make -f
 
-## NEED TO CHANGE TO clang++-9 ,
-CXX=clang++-14
+## NEED TO CHANGE TO clang++-9 ,clang++-14
+CXX=clang++-9
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects

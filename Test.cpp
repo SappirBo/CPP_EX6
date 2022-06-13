@@ -65,6 +65,11 @@ TEST_CASE("Class Game"){
         CHECK_FALSE(!(game.getHomeScore() < game.getOutScore()));
     }
 
+    CHECK_FALSE(!(game.getHomeScore() <= 110));
+    CHECK_FALSE(!(game.getHomeScore() >= 55));
+    CHECK_FALSE(!(game.getOutScore() <= 110));
+    CHECK_FALSE(!(game.getOutScore() >= 55));
+
     // CHECK if the Game id finished (expectin gto get true).
     CHECK_FALSE(!game.isFinished());
     
